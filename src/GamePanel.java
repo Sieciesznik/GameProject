@@ -2,7 +2,7 @@
  * Created by Arkadiusz Nowak on 23.05.2017.
  */
 import java.awt.*;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class GamePanel extends JPanel{
 

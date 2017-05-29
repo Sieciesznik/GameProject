@@ -12,6 +12,9 @@ public final class GameStaticMaps {
     static {
         graphicTagsToPath.put("hero", "C:\\Users\\Arkadiusz Nowak\\IdeaProjects\\DarkSouls2D\\assets\\actors\\hero.bmp");
         graphicTagsToPath.put("druid", "C:\\Users\\Arkadiusz Nowak\\IdeaProjects\\DarkSouls2D\\assets\\actors\\druid.bmp");
+        graphicTagsToPath.put("player0", "C:\\Users\\Arkadiusz Nowak\\IdeaProjects\\DarkSouls2D\\assets\\actors\\player0.bmp");
+        graphicTagsToPath.put("player1", "C:\\Users\\Arkadiusz Nowak\\IdeaProjects\\DarkSouls2D\\assets\\actors\\player1.bmp");
+        graphicTagsToPath.put("player2", "C:\\Users\\Arkadiusz Nowak\\IdeaProjects\\DarkSouls2D\\assets\\actors\\player2.bmp");
     }
 
 }

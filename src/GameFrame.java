@@ -1,7 +1,7 @@
 /**
  * Created by Arkadiusz Nowak on 23.05.2017.
  */
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class GameFrame extends JFrame{
 

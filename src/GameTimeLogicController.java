@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * Created by Arkadiusz Nowak on 27.05.2017.
  */
@@ -15,12 +13,13 @@ public class GameTimeLogicController {
         this.gameLogicIdleController = glic;
     }
 
-    public void runLogic(){
+    public void runLogic(long tic){
 
         ShitTestGenerator.characters.get(0).move();
         ShitTestGenerator.characters.get(1).move();
         ShitTestGenerator.characters.get(2).move();
-        gameLogicPlayerController.move();
+        gameLogicPlayerController.move(tic);
+        gameLogicPlayerController.runEffects();
 
     }
 

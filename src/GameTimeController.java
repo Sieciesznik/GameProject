@@ -7,23 +7,27 @@ import java.util.TimerTask;
 public class GameTimeController {
 
     int breakTime;
+    long tic;
 
     GamePanel gamePanel;
     Timer timer;
     TimerTask timerTask;
     GameTimeLogicController gameTimeLogicController;
 
+
     public GameTimeController(GamePanel gamePanel, GameTimeLogicController gameTimeLogicController){
         this.breakTime = 17;
+        this.tic = 0;
         this.gamePanel = gamePanel;
         this.gameTimeLogicController = gameTimeLogicController;
+
 
         this.timer = new Timer();
         this.timerTask = new TimerTask() {
             @Override
             public void run() {
-
-                gameTimeLogicController.runLogic();
+                tic++;
+                gameTimeLogicController.runLogic(tic);
                 gamePanel.repaint();
             }
         };

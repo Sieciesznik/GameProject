@@ -1,7 +1,8 @@
 /**
  * Created by Arkadiusz Nowak on 19.05.2017.
  */
-import java.awt.EventQueue;
+
+import java.awt.*;
 
 public class DS2D {
 
