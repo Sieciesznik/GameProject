@@ -18,8 +18,10 @@ public class GameTimeLogicController {
         ShitTestGenerator.characters.get(0).move();
         ShitTestGenerator.characters.get(1).move();
         ShitTestGenerator.characters.get(2).move();
-        gameLogicPlayerController.move(tic);
+
         gameLogicPlayerController.runEffects();
+        gameLogicPlayerController.move(tic);
+
 
     }
 

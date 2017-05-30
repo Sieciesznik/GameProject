@@ -33,6 +33,7 @@ public class GameLogicPlayerController extends GameLogicController{
 
     private void evaluateMovementKeys(Set<Integer> keysSet){
 
+
         playerCharacter.stop();
         playerCharacter.isMoving = false;
 
@@ -44,7 +45,6 @@ public class GameLogicPlayerController extends GameLogicController{
         isShiftPressed = false;
 
         for(Integer i : keysSet){
-
             if(i==16) isShiftPressed = true;
 
         }

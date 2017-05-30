@@ -40,6 +40,7 @@ public class DataMovingObject extends DataGenericObject {
         if(gravity) z += vectZ;
         dataPanelScreenElement.positionX = (int)x;
         dataPanelScreenElement.positionY = (int)y;
+
     }
 
     public void stop(){
