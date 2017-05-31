@@ -5,7 +5,7 @@ public class GameLogicEffectDodge2 extends GameLogicEffect {
     GameLogicEffectDodge2(DataGenericObject affectedObject, long startingTic, int duration) {
         super(affectedObject, startingTic, 18);
         this.isActive = true;
-        this.id = 1;
+        this.id = 2;
         this.priority = 3;
     }
 
@@ -22,7 +22,7 @@ public class GameLogicEffectDodge2 extends GameLogicEffect {
     @Override
     public void run(long currentTic) {
 
-        ((DataMovingObject)affectedObject).speed = 2;
+        ((DataMovingObject)affectedObject).speed.currentValue = ((DataMovingObject)affectedObject).speed.baseValue/2;
 
         if(currentTic == targetTic) release();
     }
@@ -30,6 +30,6 @@ public class GameLogicEffectDodge2 extends GameLogicEffect {
     @Override
     public void release() {
         affectedObject.effects.remove(this.id);
-        ((DataMovingObject)affectedObject).speed = 5;
+        ((DataMovingObject)affectedObject).speed.returnToBase();
     }
 }

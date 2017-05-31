@@ -11,7 +11,6 @@ import java.util.Set;
 public class GameKeyboardController implements KeyListener {
 
     GameLogicPlayerController gameLogicPlayerController;
-    Set <Integer> pressedKeys = new HashSet<>();
 
     public GameKeyboardController(GameLogicPlayerController glpc){
         this.gameLogicPlayerController = glpc;
@@ -24,13 +23,11 @@ public class GameKeyboardController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        pressedKeys.add(e.getKeyCode());
-        gameLogicPlayerController.keyPressed(pressedKeys);
+        gameLogicPlayerController.keyPressed(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        pressedKeys.remove(e.getKeyCode());
-        gameLogicPlayerController.keyPressed(pressedKeys);
+        gameLogicPlayerController.keyReleased(e.getKeyCode());
     }
 }

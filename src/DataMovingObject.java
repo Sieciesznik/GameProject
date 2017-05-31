@@ -1,3 +1,7 @@
+import javafx.util.Pair;
+
+import javax.xml.crypto.Data;
+
 /**
  * Created by Arkadiusz Nowak on 24.05.2017.
  */
@@ -6,12 +10,12 @@ public class DataMovingObject extends DataGenericObject {
     double x;
     double y;
     double z;
-    double vectX;
-    double vectY;
+    DataAttribute vectX;
+    DataAttribute vectY;
     double vectZ;
     boolean collision;
     boolean gravity;
-    double speed;
+    DataAttribute speed;
     boolean isMoving;
     boolean isControllable;
 
@@ -22,12 +26,12 @@ public class DataMovingObject extends DataGenericObject {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.vectX = vectX;
-        this.vectY = vectY;
+        this.vectX = new DataAttribute(vectX);
+        this.vectY = new DataAttribute(vectY);
         this.vectZ = vectZ;
         this.collision = collision;
         this.gravity = gravity;
-        this.speed = speed;
+        this.speed = new DataAttribute(speed);
         this.isMoving = isMoving;
         this.isControllable = isControllable;
     }
@@ -35,8 +39,8 @@ public class DataMovingObject extends DataGenericObject {
 
 
     public void move(){
-        x += vectX;
-        y += vectY;
+        x += vectX.currentValue;
+        y += vectY.currentValue;
         if(gravity) z += vectZ;
         dataPanelScreenElement.positionX = (int)x;
         dataPanelScreenElement.positionY = (int)y;
@@ -44,39 +48,8 @@ public class DataMovingObject extends DataGenericObject {
     }
 
     public void stop(){
-        vectX = 0;
-        vectY = 0;
+        vectX.returnToBase();
+        vectY.returnToBase();
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public double getVectX() {
-        return vectX;
-    }
-
-    public double getVectY() {
-        return vectY;
-    }
-
-    public double getVectZ() {
-        return vectZ;
-    }
-
-    public boolean isCollision() {
-        return collision;
-    }
-
-    public boolean isGravity() {
-        return gravity;
-    }
 }

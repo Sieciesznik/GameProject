@@ -13,8 +13,8 @@ public class GameLogicEffectDodge extends GameLogicEffect {
     GameLogicEffectDodge(DataGenericObject affectedObject, long startingTic, int duration) {
         super(affectedObject, startingTic, 12);
         this.isActive = true;
-        this.id = 0;
-        this.priority = 1;
+        this.id = 1;
+        this.priority = 2;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class GameLogicEffectDodge extends GameLogicEffect {
                                     (Math.pow(x, 2) + Math.pow(y, 2))           );
         }
 
-        ((DataMovingObject)affectedObject).vectX -= temp*x;
-        ((DataMovingObject)affectedObject).vectY -= temp*y;
+        ((DataMovingObject)affectedObject).vectX.currentValue -= temp*x;
+        ((DataMovingObject)affectedObject).vectY.currentValue -= temp*y;
         ((DataMovingObject)affectedObject).isMoving = true;
         ((DataMovingObject)affectedObject).isControllable = false;
 
@@ -52,10 +52,10 @@ public class GameLogicEffectDodge extends GameLogicEffect {
     @Override
     public void release() {
         affectedObject.effects.remove(this.id);
-        ((DataMovingObject)affectedObject).vectX = 0;
-        ((DataMovingObject)affectedObject).vectY = 0;
+        ((DataMovingObject)affectedObject).vectX.returnToBase();
+        ((DataMovingObject)affectedObject).vectY.returnToBase();
         ((DataMovingObject)affectedObject).isControllable = true;
         ((DataMovingObject)affectedObject).isMoving = false;
-        affectedObject.effects.put(1, new GameLogicEffectDodge2(affectedObject, currentTic, 0)); //this effect has fixed duration
+        affectedObject.effects.put(2, new GameLogicEffectDodge2(affectedObject, currentTic, 0)); //this effect has fixed duration
     }
 }

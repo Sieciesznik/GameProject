@@ -9,9 +9,9 @@ public class GameLogicActiveController extends GameLogicController{
         super(dpse);
 
 
-        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(0,"hero", 600,170, 0, 0));
-        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(1,"druid", 230,400, 0.2, 0));
-        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(2,"hero", 200,500, 4, -2.3));
+        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(0,"hero", 600,170));
+        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(1,"druid", 230,400));
+        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(2,"hero", 200,500));
 
     }
 
