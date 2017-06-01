@@ -5,8 +5,8 @@ import java.util.ArrayList;
  */
 public class GameLogicIdleController extends GameLogicController{
 
-    public GameLogicIdleController(ArrayList<DataPanelScreenElement> dpse){
-        super(dpse);
+    public GameLogicIdleController(GameLogicDisplayController gldc){
+        super(gldc);
     }
 
 }

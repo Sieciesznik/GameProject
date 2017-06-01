@@ -6,11 +6,11 @@ import java.util.ArrayList;
 public class GameLogicController {
 
     ArrayList <DataMovingObject> controlledObjects;
-    ArrayList <DataPanelScreenElement> dataPanelScreenElements;
     GameLogicController gameLogicSiblingController;
+    GameLogicDisplayController gameLogicDisplayController;
 
-    public GameLogicController(ArrayList<DataPanelScreenElement> dpse){
-        this.dataPanelScreenElements = dpse;
+    public GameLogicController(GameLogicDisplayController gldc){
+        this.gameLogicDisplayController = gldc;
     }
 
     public void setGameLogicSiblingController(GameLogicController gameLogicSiblingController){
@@ -19,5 +19,9 @@ public class GameLogicController {
 
     protected void passTheObject(int index){
         gameLogicSiblingController.controlledObjects.add(controlledObjects.get(index));
+    }
+
+    public void addObject(DataMovingObject object){
+        controlledObjects.add(object);
     }
 }

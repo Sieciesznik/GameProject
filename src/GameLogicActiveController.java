@@ -5,14 +5,22 @@ import java.util.ArrayList;
  */
 public class GameLogicActiveController extends GameLogicController{
 
-    public GameLogicActiveController(ArrayList<DataPanelScreenElement> dpse){
-        super(dpse);
+    public GameLogicActiveController(GameLogicDisplayController gldc){
+        super(gldc);
+        controlledObjects = new ArrayList<>();
 
+    }
 
-        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(0,"hero", 600,170));
-        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(1,"druid", 230,400));
-        dataPanelScreenElements.add(ShitTestGenerator.getNewActor(2,"hero", 200,500));
+    public void testMoveRight(){
+        for(DataMovingObject o : controlledObjects){
+            o.vectX.currentValue = o.speed.currentValue;
+        }
+    }
 
+    public  void move(){
+        for(DataMovingObject o : controlledObjects){
+            o.move();
+        }
     }
 
 }

@@ -11,7 +11,7 @@ public class GameLogicPlayerController extends GameLogicController{
     DataCharacterObject playerCharacter;
     int startingX = 800;
     int startingY = 500;
-    int startingSpeed = 5;
+    int startingSpeed = 10;
     int startingHitPoints = 100;
     int startingManaPoints = 10;
     long tic;
@@ -19,13 +19,15 @@ public class GameLogicPlayerController extends GameLogicController{
     boolean isShiftPressed = false;
     Set <Integer> pressedKeys = new HashSet<>();
 
-    public GameLogicPlayerController(ArrayList<DataPanelScreenElement> dpse){
-        super(dpse);
-        playerCharacter = new DataCharacterObject(  0, "player", new DataPanelScreenElement(0, "player0", startingX, startingY),
+    public GameLogicPlayerController(GameLogicDisplayController gldc){
+        super(gldc);
+        playerCharacter = new DataCharacterObject(  0, "player", new DataPanelScreenElement(3, "player0", startingX, startingY),
                                                     startingX, startingY, 1,
                                                     true, true, startingSpeed, false, true,
                                                     startingHitPoints, startingManaPoints);
-        dataPanelScreenElements.add(playerCharacter.dataPanelScreenElement);
+        playerCharacter.effects.put(0, new GameLogicEffectMove(playerCharacter, tic, 0));
+
+        gameLogicDisplayController.addObject(playerCharacter);
     }
 
     void keyPressed(int keyCode){
@@ -35,8 +37,6 @@ public class GameLogicPlayerController extends GameLogicController{
         checkSkillKeys();
         evaluateMovementKeys();
 
-        System.out.println("Pressed "+keyCode);
-
     }
 
     void keyReleased(int keyCode){
@@ -45,11 +45,10 @@ public class GameLogicPlayerController extends GameLogicController{
         checkFlagKeys();
         checkSkillKeys();
         evaluateMovementKeys();
-
-        System.out.println("Released "+keyCode);
     }
 
     private void checkFlagKeys(){
+        isShiftPressed = false;
 
         for(Integer i : pressedKeys){
             if(i==16) isShiftPressed = true;
@@ -74,9 +73,6 @@ public class GameLogicPlayerController extends GameLogicController{
         boolean movedDown   = false;
         boolean movedLeft   = false;
         boolean movedRight  = false;
-        double diagonalSpeed = 0.707;
-        isShiftPressed = false;
-
 
         if(playerCharacter.isControllable){
             for(Integer i : pressedKeys){
@@ -86,19 +82,10 @@ public class GameLogicPlayerController extends GameLogicController{
                 else if(i==68) movedRight = true;            // 68 == 'd'
             }
 
-                    if(  movedUp && !movedDown  && (!movedLeft == !movedRight)) playerCharacter.vectY.currentValue -= playerCharacter.speed.currentValue;
-            else    if( !movedUp &&  movedDown  && (!movedLeft == !movedRight)) playerCharacter.vectY.currentValue += playerCharacter.speed.currentValue;
-            else    if((!movedUp == !movedDown) &&   movedLeft && !movedRight)  playerCharacter.vectX.currentValue -= playerCharacter.speed.currentValue;
-            else    if((!movedUp == !movedDown) &&  !movedLeft &&  movedRight)  playerCharacter.vectX.currentValue += playerCharacter.speed.currentValue;
-
-            else    if( movedUp && !movedDown &&  movedLeft && !movedRight){    playerCharacter.vectY.currentValue -= playerCharacter.speed.currentValue * diagonalSpeed; playerCharacter.vectX.currentValue -= playerCharacter.speed.currentValue * diagonalSpeed;}
-            else    if( movedUp && !movedDown && !movedLeft &&  movedRight){    playerCharacter.vectY.currentValue -= playerCharacter.speed.currentValue * diagonalSpeed; playerCharacter.vectX.currentValue += playerCharacter.speed.currentValue * diagonalSpeed;}
-            else    if(!movedUp &&  movedDown &&  movedLeft && !movedRight){    playerCharacter.vectY.currentValue += playerCharacter.speed.currentValue * diagonalSpeed; playerCharacter.vectX.currentValue -= playerCharacter.speed.currentValue * diagonalSpeed;}
-            else    if(!movedUp &&  movedDown && !movedLeft &&  movedRight){    playerCharacter.vectY.currentValue += playerCharacter.speed.currentValue * diagonalSpeed; playerCharacter.vectX.currentValue += playerCharacter.speed.currentValue * diagonalSpeed;}
-
-
         }
 
+        GameLogicEffectMove effectMove = (GameLogicEffectMove) playerCharacter.effects.get(0);
+        effectMove.setFlags(movedUp, movedDown, movedLeft, movedRight);
 
         //animation
         if(movedUp || movedDown || movedLeft || movedRight) {
@@ -118,7 +105,7 @@ public class GameLogicPlayerController extends GameLogicController{
     }
 
     public void move(long tic){
-        this.tic = tic;
+        this.tic = tic; //this way controller gets updated every tic
         playerCharacter.move();
     }
 

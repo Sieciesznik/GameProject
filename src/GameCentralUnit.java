@@ -1,3 +1,4 @@
+
 /**
  * Created by Arkadiusz Nowak on 26.05.2017.
  */
@@ -10,9 +11,11 @@ public class GameCentralUnit {
     GameTimeController gameTimeController;
     GameTimeLogicController gameTimeLogicController;
     GameKeyboardController gameKeyboardController;
+    GameLogicDisplayController gameLogicDisplayController;
     GameLogicActiveController gameLogicActiveController;
     GameLogicIdleController gameLogicIdleController;
     GameLogicPlayerController gameLogicPlayerController;
+    GameInitCharCreator gameInitCharCreator;
 
     public void  init(){
 
@@ -21,15 +24,17 @@ public class GameCentralUnit {
         gamePanelScreenBuilder = new GamePanelScreenBuilder(gamePanelAssetsHandler);
         gamePanel.screenBuilder = gamePanelScreenBuilder;
 
-
-        gameLogicPlayerController = new GameLogicPlayerController(gamePanelScreenBuilder.panelScreenContent);
-        gameLogicActiveController = new GameLogicActiveController(gamePanelScreenBuilder.panelScreenContent);
-        gameLogicIdleController = new GameLogicIdleController(gamePanelScreenBuilder.panelScreenContent);
+        gameLogicDisplayController = new GameLogicDisplayController(gamePanel.screenBuilder.panelScreenContent, 1000, 800);
+        gameLogicPlayerController = new GameLogicPlayerController(gameLogicDisplayController);
+        gameLogicActiveController = new GameLogicActiveController(gameLogicDisplayController);
+        gameLogicIdleController = new GameLogicIdleController(gameLogicDisplayController);
         gameLogicActiveController.setGameLogicSiblingController(gameLogicIdleController);
         gameLogicIdleController.setGameLogicSiblingController(gameLogicActiveController);
 
-        gameTimeLogicController = new GameTimeLogicController(gameLogicPlayerController, gameLogicActiveController, gameLogicIdleController);
+        gameTimeLogicController = new GameTimeLogicController(gameLogicPlayerController, gameLogicActiveController, gameLogicIdleController, gameLogicDisplayController);
         gameTimeController = new GameTimeController(gamePanel, gameTimeLogicController);
         gameKeyboardController = new GameKeyboardController(gameLogicPlayerController);
+
+        gameInitCharCreator = new GameInitCharCreator(gameLogicDisplayController, gameLogicActiveController, gameLogicIdleController);
     }
 }

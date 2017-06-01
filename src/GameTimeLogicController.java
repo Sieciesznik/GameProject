@@ -6,22 +6,23 @@ public class GameTimeLogicController {
     GameLogicPlayerController gameLogicPlayerController;
     GameLogicActiveController gameLogicActiveController;
     GameLogicIdleController gameLogicIdleController;
+    GameLogicDisplayController gameLogicDisplayController;
 
-    GameTimeLogicController(GameLogicPlayerController glpc, GameLogicActiveController glac, GameLogicIdleController glic){
+    GameTimeLogicController(GameLogicPlayerController glpc, GameLogicActiveController glac, GameLogicIdleController glic, GameLogicDisplayController gldc){
         this.gameLogicPlayerController = glpc;
         this.gameLogicActiveController = glac;
         this.gameLogicIdleController = glic;
+        this.gameLogicDisplayController = gldc;
     }
 
     public void runLogic(long tic){
 
-        ShitTestGenerator.characters.get(0).move();
-        ShitTestGenerator.characters.get(1).move();
-        ShitTestGenerator.characters.get(2).move();
-
         gameLogicPlayerController.runEffects();
+        gameLogicActiveController.testMoveRight();
         gameLogicPlayerController.move(tic);
+        gameLogicActiveController.move();
 
+        gameLogicDisplayController.checkDisplay();
 
     }
 

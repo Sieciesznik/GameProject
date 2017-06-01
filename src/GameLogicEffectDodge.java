@@ -32,7 +32,7 @@ public class GameLogicEffectDodge extends GameLogicEffect {
         this.currentTic = currentTic-1;
 
         if(this.currentTic == this.startingTic) {        //at first tic
-            double targetVector = 10;
+            double targetVector = 50;
             Point mouseLocation = MouseInfo.getPointerInfo().getLocation();
             x = ((DataMovingObject) affectedObject).x - mouseLocation.getX();
             y = ((DataMovingObject) affectedObject).y - mouseLocation.getY();
@@ -44,7 +44,6 @@ public class GameLogicEffectDodge extends GameLogicEffect {
         ((DataMovingObject)affectedObject).vectX.currentValue -= temp*x;
         ((DataMovingObject)affectedObject).vectY.currentValue -= temp*y;
         ((DataMovingObject)affectedObject).isMoving = true;
-        ((DataMovingObject)affectedObject).isControllable = false;
 
         if(currentTic == targetTic) release();
     }
